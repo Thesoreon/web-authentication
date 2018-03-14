@@ -1,5 +1,8 @@
 import * as React from "react";
 import { reduxForm, Field } from "redux-form";
+import { connect } from "react-redux";
+import * as actions from "../../actions";
+import { Redirect } from "react-router-dom";
 
 interface IField {
     meta: {
@@ -11,7 +14,18 @@ interface IField {
     type: string;
 }
 
-class SignIn extends React.Component {
+interface IProps {
+    handleSubmit: any;
+    signinUser: any;
+    history: any;
+}
+
+class SignIn extends React.Component<IProps> {
+    constructor(props: any) {
+        super(props);
+
+        this.submitForm = this.submitForm.bind(this);
+    }
 
     renderField(field: IField) {
         const { meta: { touched, error } } = field;
@@ -22,9 +36,16 @@ class SignIn extends React.Component {
         );
     }
 
+    submitForm(values: object) {
+        this.props.signinUser(values, () => {
+            this.props.history.push("/feature");
+        });
+    }
+
     render() {
+        const { handleSubmit } = this.props;
         return(
-            <form>
+            <form onSubmit={handleSubmit(this.submitForm)}>
                 <Field name="email" label="Email" type="text" component={this.renderField} />
                 <Field name="password" label="Password" type="password" component={this.renderField} />
                 <button>Sign in</button>
@@ -35,4 +56,4 @@ class SignIn extends React.Component {
 
 export default reduxForm({
     form: "SignIn"
-})(SignIn);
+})(connect(null, actions)(SignIn));

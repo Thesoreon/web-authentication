@@ -12,6 +12,8 @@
      "no-implicit-dependencies": false,
      "no-empty-interface": false,
      "member-access": false,
-     "no-console": false
+     "no-console": false,
+     "triple-equals": false,
+     "only-arrow-functions": false
   }
 }

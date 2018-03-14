@@ -9,10 +9,9 @@ export default class Index extends React.Component {
     render() {
         return(
             <div>
-                <Header />
-                <SignIn/>
                 <Switch>
-                    <Route path="/ha" component={Header}/>
+                    <Route path="/signin" component={SignIn}/>
+                    <Route path="/" component={Header}/>
                 </Switch>
             </div>
         );
