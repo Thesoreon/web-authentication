@@ -18,6 +18,7 @@ interface IProps {
     handleSubmit: any;
     signinUser: any;
     history: any;
+    errorMessage: string;
 }
 
 class SignIn extends React.Component<IProps> {
@@ -36,6 +37,14 @@ class SignIn extends React.Component<IProps> {
         );
     }
 
+    renderErrorMessage() {
+        if (this.props.errorMessage) {
+            return (
+                <div>{this.props.errorMessage}</div>
+            );
+        }
+    }
+
     submitForm(values: object) {
         this.props.signinUser(values, () => {
             this.props.history.push("/feature");
@@ -48,12 +57,17 @@ class SignIn extends React.Component<IProps> {
             <form onSubmit={handleSubmit(this.submitForm)}>
                 <Field name="email" label="Email" type="text" component={this.renderField} />
                 <Field name="password" label="Password" type="password" component={this.renderField} />
+                {this.renderErrorMessage()}
                 <button>Sign in</button>
             </form>
         );
     }
 }
 
+function mapStateToProps(state: any) {
+    return { errorMessage: state.auth.error };
+}
+
 export default reduxForm({
     form: "SignIn"
-})(connect(null, actions)(SignIn));
+})(connect(mapStateToProps, actions)(SignIn));
