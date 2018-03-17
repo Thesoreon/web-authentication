@@ -9,8 +9,10 @@ import Index from "./components/index.component";
 /* Styles */
 import "./style/main.less";
 
+const store = initializeStore();
+
 ReactDOM.render(
-    <Provider store={initializeStore()}>
+    <Provider store={store}>
         <BrowserRouter>
             <Index />
         </BrowserRouter>

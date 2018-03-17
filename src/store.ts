@@ -4,6 +4,8 @@ import reduxThunk from "redux-thunk";
 
 import reducers from "./reducers";
 
+import { AUTH_USER } from "./actions/types";
+
 export function initializeStore() {
     const enhancers = [
         applyMiddleware(reduxThunk)
@@ -12,5 +14,12 @@ export function initializeStore() {
     const createStoreWithMiddleware = composeWithDevTools(...enhancers)(createStore);
 
     const store = createStoreWithMiddleware(reducers);
-    return createStoreWithMiddleware(reducers);
+
+    const token = localStorage.getItem("token");
+
+    if (token) {
+        store.dispatch({ type: AUTH_USER });
+    }
+
+    return store;
 }

@@ -8,13 +8,15 @@ import SignOut from "./auth/signout.component";
 import SignUp from "./auth/signup.component";
 import Feature from "./feature.component";
 
+import RequireAuth from "./auth/require_auth.hoc";
+
 export default class Index extends React.Component {
     render() {
         return(
             <div>
                 <Header />
                 <Switch>
-                    <Route path="/feature" component={Feature}/>
+                    <Route path="/feature" component={RequireAuth(Feature)}/>
                     <Route path="/signup" component={SignUp} />
                     <Route path="/signout" component={SignOut} />
                     <Route path="/signin" component={SignIn}/>
