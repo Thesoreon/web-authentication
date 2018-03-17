@@ -6,6 +6,7 @@ import Header from "./header.component";
 import SignIn from "./auth/signin.component";
 import SignOut from "./auth/signout.component";
 import SignUp from "./auth/signup.component";
+import Feature from "./feature.component";
 
 export default class Index extends React.Component {
     render() {
@@ -13,6 +14,7 @@ export default class Index extends React.Component {
             <div>
                 <Header />
                 <Switch>
+                    <Route path="/feature" component={Feature}/>
                     <Route path="/signup" component={SignUp} />
                     <Route path="/signout" component={SignOut} />
                     <Route path="/signin" component={SignIn}/>

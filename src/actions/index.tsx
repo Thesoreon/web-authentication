@@ -19,6 +19,23 @@ export function signinUser(values: object, callback: any) {
     };
 }
 
+export function signUpUser(values: any, callback: any) {
+    const { email, password } = values;
+    return function(dispatch: any) {
+        axios.post(`${ROOT_URL}/signup`, { email, password})
+        .then((response) => {
+            dispatch({ type: AUTH_USER });
+
+            localStorage.setItem("token", response.data.token);
+
+            callback();
+        })
+        .catch((error) => {
+            dispatch(authError(error.response.data.error));
+        });
+    };
+}
+
 export function authError(error: string) {
     return {
         type: AUTH_ERROR,

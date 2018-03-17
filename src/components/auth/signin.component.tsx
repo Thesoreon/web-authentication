@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import * as actions from "../../actions";
 import { Redirect } from "react-router-dom";
 
-interface IField {
+export interface IField {
     meta: {
         touched: boolean;
         error: object;
